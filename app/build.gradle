@@ -1,0 +1,81 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath rootProject.ext.plugin.androidPlugin
+        classpath rootProject.ext.plugin.retroLambda
+        classpath rootProject.ext.plugin.androidApt
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+
+repositories {
+    maven {
+        url "https://mint.splunk.com/gradle/"
+    }
+}
+Integer VERSION_CODE = 2015091713
+String VERSION_NAME = "1.0"
+String APK_NAME = "Shopper"
+android {
+    compileSdkVersion rootProject.ext.config.compileSdkVersion
+    buildToolsVersion rootProject.ext.config.buildToolsVersion
+//    app-<flavor>-<buildtype>.apk; for example, app-full-release.apk and app-demo-debug.apk.
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    output.outputFile.name.replace(output.outputFile.name, VERSION_CODE + "-" + VERSION_NAME + "-" + APK_NAME + ".apk"))
+        }
+    }
+    defaultConfig {
+        applicationId "com.sunnypoint.androidcore"
+        minSdkVersion rootProject.ext.config.minSdkVersion
+        targetSdkVersion rootProject.ext.config.compileSdkVersion
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+    }
+    buildTypes {
+        debug {
+//            applicationIdSuffix '.dev'
+//            versionNameSuffix '-dev'
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    // Configure for RetroLambda
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':core')
+
+    def dependency = rootProject.ext.dependency
+    compile dependency.dagger
+    apt dependency.daggerCompiler
+    provided dependency.generatedAnnotation;
+    compile dependency.picasso
+    compile dependency.mint
+
+}
