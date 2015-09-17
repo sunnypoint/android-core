@@ -5,7 +5,7 @@ import android.app.Application;
 import com.sunnypoint.core.compat.SPMCPlatformImpSpecificFactory;
 
 /**
- * Created by NhanCao on 13-Sep-15.
+ * Created by NhanCao on 19-Sep-15.
  */
 public abstract class SPMCAppBase extends Application {
 

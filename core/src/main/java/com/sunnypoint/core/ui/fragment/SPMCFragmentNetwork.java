@@ -1,6 +1,6 @@
 package com.sunnypoint.core.ui.fragment;
 /**
- * Created by NhanCao on 13-Sep-15.
+ * Created by NhanCao on 19-Sep-15.
  */
 
 import android.content.Context;

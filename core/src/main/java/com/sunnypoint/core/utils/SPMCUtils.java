@@ -8,7 +8,7 @@ import android.text.style.ForegroundColorSpan;
 import java.text.Normalizer;
 
 /**
- * Created by NhanCao on 13-Sep-15.
+ * Created by NhanCao on 19-Sep-15.
  */
 public class SPMCUtils {
 

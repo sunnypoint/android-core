@@ -1,6 +1,6 @@
 package com.sunnypoint.core.dagger.module;
 /**
- * Created by NhanCao on 13-Sep-15.
+ * Created by NhanCao on 19-Sep-15.
  */
 
 import android.app.Application;

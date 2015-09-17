@@ -1,7 +1,7 @@
 package com.sunnypoint.core.background;
 
 /**
- * Created by NhanCao on 13-Sep-15.
+ * Created by NhanCao on 19-Sep-15.
  */
 
 import android.app.Service;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.sunnypoint.core.utils.SPMCUtils;
 
-public abstract class NCMCBaseService extends Service {
+public abstract class SPMCBaseService extends Service {
 
     ServiceReceiver myReceiver;
 
@@ -48,7 +48,7 @@ public abstract class NCMCBaseService extends Service {
     class ServiceReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            NCMCBaseService.this.onReceive(context, intent);
+            SPMCBaseService.this.onReceive(context, intent);
         }
     }
 }
